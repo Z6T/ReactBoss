@@ -1,26 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Component, MouseEvent } from 'react'
+import getData, { Iresponse } from './services/fetch';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Sfc from './Sfc';
+interface IProps {
+  color?: string,
+  size: number
 }
 
-export default App;
+interface IState {
+  count: number,
+  data: Iresponse<number[]>
+}
+export default class App extends Component<IProps, IState> {
+
+  state: Readonly<IState> = {
+    count: 99,
+    data: {
+      message: '',
+      code: 0,
+      result: []
+    }
+  }
+
+  async componentDidMount() {
+    const data = await getData()
+    this.setState({ data });
+  }
+
+  click = (e: MouseEvent) => {
+    console.log(e)
+    const person = { name: "name", age: 18 };
+
+    function p(a: keyof typeof person) { console.log(a); }  // 类型断言
+
+    // p("x"); // error 
+    p("name"); // ok
+  }
+
+
+  render() {
+    const { data: {
+      result
+    } } = this.state
+    return <><div>
+      {this.props.size}
+      一个有状态组件
+    </div>
+      <Sfc onClick={this.click}>
+        <div>sfc-children</div>
+      </Sfc>
+      fetch:<br />
+      <span>{result}</span>
+    </>
+  }
+}
