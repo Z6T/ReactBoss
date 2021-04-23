@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './App';
 
-import App from './mobx/TodoApp';
 import { Provider } from 'mobx-react'
+import App from './mobx/TodoApp';
+import store from './mobx/store'
 
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <App size={99} /> */}
-    <Provider  >
+    <Provider store={store}  >
 
       <App />
     </Provider>
