@@ -1,10 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+// import App from './App';
+
+import App from './mobx/TodoApp';
+import { Provider } from 'mobx-react'
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App size={99} />
+    {/* <App size={99} /> */}
+    <Provider  >
+
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

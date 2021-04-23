@@ -22,7 +22,7 @@ export default class App extends Component<IProps, IState> {
     }
   }
 
-  async componentDidMount() {
+  async componentDidMount () {
     const data = await getData()
     this.setState({ data });
   }
@@ -31,14 +31,14 @@ export default class App extends Component<IProps, IState> {
     console.log(e)
     const person = { name: "name", age: 18 };
 
-    function p(a: keyof typeof person) { console.log(a); }  // 类型断言
+    function p (a: keyof typeof person) { console.log(a); }  // 类型断言
 
     // p("x"); // error 
     p("name"); // ok
   }
 
 
-  render() {
+  render () {
     const { data: {
       result
     } } = this.state
